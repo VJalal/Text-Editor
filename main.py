@@ -8,7 +8,7 @@ class MyGUI(QMainWindow):
     def __init__(self):
         super(MyGUI, self).__init__()
         uic.loadUi('untitled.ui', self)
-        # self.show()
+        self.show()
 
 
 app = QApplication([])
