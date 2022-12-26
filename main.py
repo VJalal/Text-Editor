@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 
@@ -14,4 +14,4 @@ class MyGUI(QMainWindow):
 app = QApplication([])
 window = MyGUI()
 app.exec_()
->>>>>>> 3cf2342ae76459761b0e4219fbc65d71212d3c5c
+
