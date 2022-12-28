@@ -2,6 +2,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5 import uic
+from PyQt5.QtGui import *
 
 
 class MyGUI(QMainWindow):
@@ -14,6 +15,48 @@ class MyGUI(QMainWindow):
         self.Numbers.setReadOnly(True)
         self.TextBox.verticalScrollBar().valueChanged.connect(
             self.Numbers.verticalScrollBar().setValue)
+        self.actionSave.triggered.connect(self.saver)
+        self.actionFont.triggered.connect(self.fontDialog)
+        self.actionColor.triggered.connect(self.colorDialog)
+        self.actionBold.triggered.connect(self.boldDialog)
+        self.actionItalic.triggered.connect(self.italicDialog)
+        self.actionUnderline.triggered.connect(self.underlineDialog)
+    
+    def saver(self):
+        filename = QFileDialog.getSaveFileName(self, 'Save') #save file
+        if filename[0]:
+            f = open(filename[0], 'w') #in right mode (w mode)
+
+            with f:
+                text = self.TextBox.toPlainText() #Whatever text written in TextBox will be saved
+                f.write(text)
+                QMessageBox.about(self, "Save", "File saved successfully")
+
+
+    def fontDialog(self):
+        font, ok = QFontDialog.getFont()
+
+        if ok: 
+            self.TextBox.setFont(font)
+
+    def colorDialog(self):
+        color = QColorDialog.getColor()
+        self.TextBox.setTextColor(color)
+
+    def boldDialog(self):
+        font = QFont()
+        font.setBold(True)
+        self.TextBox.setFont(font)
+
+    def italicDialog(self):
+        font = QFont()
+        font.setItalic(True)
+        self.TextBox.setFont(font)
+
+    def underlineDialog(self):
+        font = QFont()
+        font.setUnderline(True)
+        self.TextBox.setFont(font)
 
     def textChange(self):
         self.lineNum()
